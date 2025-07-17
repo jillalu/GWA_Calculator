@@ -1,0 +1,49 @@
+body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      margin-top: 2rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .hidden {
+      display: none;
+    }
+.grade-badge {
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+    min-width: 60px;
+    text-align: center;
+  }
+
+  .grade-excellent {
+    background-color: rgba(25, 135, 84, 0.15);  /* green blur */
+    color: #198754;
+  }
+
+  .grade-good {
+    background-color: rgba(255, 193, 7, 0.2);  /* yellow blur */
+    color: #b37d00;
+  }
+
+  .grade-passing {
+    background-color: rgba(253, 126, 20, 0.2);  /* orange blur */
+    color: #b36b00;
+  }
+
+  .grade-failing {
+    background-color: rgba(220, 53, 69, 0.2);  /* red blur */
+    color: #842029;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+footer {
+  font-size: 0.9rem;
+  color: #555;
+}
