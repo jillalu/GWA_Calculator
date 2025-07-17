@@ -9,29 +9,29 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container mt-5">
+  <div class="container px-2 px-md-4 mt-5">
     <h1 class="text-center mb-4">General Weighted Average Calculator</h1>
 
     <!-- FORM -->
     <div id="inputForm">
       <div class="row mb-4">
-        <div class="col-md-6">
+        <div class="col-12 col-md-4 mt-3">
           <label class="form-label">Student Name</label>
           <input type="text" class="form-control" id="studentName" required>
         </div>
-        <div class="col-md-6">
+        <div class="col-12 col-md-4 mt-3">
           <label class="form-label">College</label>
           <input type="text" class="form-control" id="college" required>
         </div>
-        <div class="col-md-4 mt-3">
+        <div class="col-12 col-md-4 mt-3">
           <label class="form-label">Course</label>
           <input type="text" class="form-control" id="course" required>
         </div>
-        <div class="col-md-4 mt-3">
+        <div class="col-12 col-md-4 mt-3">
           <label class="form-label">Academic Year</label>
           <input type="text" class="form-control" id="academicYear" required>
         </div>
-        <div class="col-md-4 mt-3">
+        <div class="col-12 col-md-4 mt-3">
           <label class="form-label">Term</label>
           <input type="text" class="form-control" id="term" required>
         </div>
@@ -79,7 +79,7 @@
       <p>Term: <strong><span id="outputTerm"></span></strong></p>
 
       <div class="table-responsive">
-      <table class="table table-bordered text-center align-middle">
+      <table class="table table-bordered text-center align-middle mb-0">
           <thead class="table-light">
             <tr>
               <th>Subject</th>
@@ -107,141 +107,142 @@
   </footer>
 
   <script>
-    function addRow() {
-      const tbody = document.getElementById("gradeBody");
-      const row = document.createElement("tr");
+  function addRow() {
+    const tbody = document.getElementById("gradeBody");
+    const row = document.createElement("tr");
 
-      row.innerHTML = `
-        <td><input type="text" class="form-control" placeholder="Enter subject"></td>
-        <td><input type="number" class="form-control" min="1" max="6" step="0.5" placeholder="3"></td>
-        <td><input type="number" class="form-control" min="1" max="5" step="0.25" placeholder="1.00"></td>
-        <td><button class="btn btn-danger btn-sm" onclick="removeRow(this)"><i class="bi bi-trash-fill me-1"></i></button></td>
-      `;
-      tbody.appendChild(row);
-    }
+    row.innerHTML = `
+      <td><input type="text" class="form-control" placeholder="Enter subject"></td>
+      <td><input type="number" class="form-control" min="1" max="6" step="0.5" placeholder="3"></td>
+      <td><input type="number" class="form-control" min="1" max="5" step="0.25" placeholder="1.00"></td>
+      <td><button class="btn btn-danger btn-sm" onclick="removeRow(this)"><i class="bi bi-trash-fill me-1"></i></button></td>
+    `;
+    tbody.appendChild(row);
+  }
 
-    function removeRow(btn) {
-      const row = btn.closest("tr");
-      row.remove();
-    }
+  function removeRow(btn) {
+    const row = btn.closest("tr");
+    row.remove();
+  }
 
-    function calculateGPA() {
-      const subjectInputs = document.querySelectorAll("#gradeBody tr td:nth-child(1) input");
-      const unitInputs = document.querySelectorAll("#gradeBody tr td:nth-child(2) input");
-      const gradeInputs = document.querySelectorAll("#gradeBody tr td:nth-child(3) input");
+  function calculateGPA() {
+    const subjectInputs = document.querySelectorAll("#gradeBody tr td:nth-child(1) input");
+    const unitInputs = document.querySelectorAll("#gradeBody tr td:nth-child(2) input");
+    const gradeInputs = document.querySelectorAll("#gradeBody tr td:nth-child(3) input");
 
-      const name = document.getElementById("studentName").value;
-      const college = document.getElementById("college").value;
-      const course = document.getElementById("course").value;
-      const year = document.getElementById("academicYear").value;
-      const term = document.getElementById("term").value;
+    const name = document.getElementById("studentName").value;
+    const college = document.getElementById("college").value;
+    const course = document.getElementById("course").value;
+    const year = document.getElementById("academicYear").value;
+    const term = document.getElementById("term").value;
 
-      let totalUnits = 0, weightedSum = 0, count = 0;
-      let finalRows = "";
+    let totalUnits = 0, weightedSum = 0, count = 0;
+    let finalRows = "";
 
-      for (let i = 0; i < gradeInputs.length; i++) {
-        const subject = subjectInputs[i].value.trim();
-        const units = parseFloat(unitInputs[i].value);
-        const grade = parseFloat(gradeInputs[i].value);
+    for (let i = 0; i < gradeInputs.length; i++) {
+      const subject = subjectInputs[i].value.trim();
+      const units = parseFloat(unitInputs[i].value);
+      const grade = parseFloat(gradeInputs[i].value);
 
-        if (subject !== "" && !isNaN(units) && !isNaN(grade)) {
-          totalUnits += units;
-          weightedSum += grade * units;
-          count++;
+      if (subject !== "" && !isNaN(units) && !isNaN(grade)) {
+        totalUnits += units;
+        weightedSum += grade * units;
+        count++;
 
-          // Grade color class
-          let badgeClass = "";
-          if (grade <= 1.75) {
-            badgeClass = "grade-badge grade-excellent";
-          } else if (grade <= 2.5) {
-            badgeClass = "grade-badge grade-good";
-          } else if (grade <= 3.0) {
-            badgeClass = "grade-badge grade-passing";
-          } else {
-            badgeClass = "grade-badge grade-failing";
-          }
-
-          finalRows += `
-              <tr>
-                <td>${subject}</td>
-                <td>${units}</td>
-                <td><span class="${badgeClass}">${grade.toFixed(2)}</span></td>
-              </tr>
-            `;
+        let badgeClass = "";
+        if (grade <= 1.75) {
+          badgeClass = "grade-badge grade-excellent";
+        } else if (grade <= 2.5) {
+          badgeClass = "grade-badge grade-good";
+        } else if (grade <= 3.0) {
+          badgeClass = "grade-badge grade-passing";
+        } else {
+          badgeClass = "grade-badge grade-failing";
         }
-      }
 
-      const average = totalUnits ? (weightedSum / totalUnits).toFixed(2) : "0.00";
-
-      // Hide form, show output
-      document.getElementById("inputForm").classList.add("hidden");
-      document.getElementById("outputDisplay").classList.remove("hidden");
-
-      // Set outputs
-      document.getElementById("outputName").textContent = name;
-      document.getElementById("outputCollege").textContent = college;
-      document.getElementById("outputCourse").textContent = course;
-      document.getElementById("outputYear").textContent = year;
-      document.getElementById("outputTerm").textContent = term;
-      document.getElementById("finalGrades").innerHTML = finalRows;
-      document.getElementById("totalSubjectsDisplay").innerHTML = `<strong>${count}</strong> | <strong>Total Units:</strong> ${totalUnits}`;
-
-      const gpaElement = document.getElementById("averageGPA");
-      gpaElement.textContent = average;
-
-      // Reset and apply GPA badge class
-      gpaElement.className = "grade-badge";
-      if (average <= 1.75) {
-        gpaElement.classList.add("grade-excellent");
-      } else if (average <= 2.5) {
-        gpaElement.classList.add("grade-good");
-      } else if (average <= 3.0) {
-        gpaElement.classList.add("grade-passing");
-      } else {
-        gpaElement.classList.add("grade-failing");
+        finalRows += `
+          <tr>
+            <td>${subject}</td>
+            <td>${units}</td>
+            <td><span class="${badgeClass}">${grade.toFixed(2)}</span></td>
+          </tr>
+        `;
       }
     }
 
-    // Visit counter using localStorage
-    document.addEventListener("DOMContentLoaded", () => {
-      const countElement = document.getElementById("visitCount");
-      let count = localStorage.getItem("visitCount");
+    const average = totalUnits ? (weightedSum / totalUnits).toFixed(2) : "0.00";
 
-      if (!count) {
-        count = 1;
-      } else {
-        count = parseInt(count) + 1;
-      }
+    document.getElementById("inputForm").classList.add("hidden");
+    document.getElementById("outputDisplay").classList.remove("hidden");
 
-      localStorage.setItem("visitCount", count);
-      countElement.textContent = count;
-    });
+    document.getElementById("outputName").textContent = name;
+    document.getElementById("outputCollege").textContent = college;
+    document.getElementById("outputCourse").textContent = course;
+    document.getElementById("outputYear").textContent = year;
+    document.getElementById("outputTerm").textContent = term;
+    document.getElementById("finalGrades").innerHTML = finalRows;
+    document.getElementById("totalSubjectsDisplay").innerHTML = `<strong>${count}</strong> | <strong>Total Units:</strong> ${totalUnits}`;
 
-    function saveAsImage() {
-  const element = document.querySelector("#outputDisplay");
-  const saveButton = event.target; // the button that triggered this
+    const gpaElement = document.getElementById("averageGPA");
+    gpaElement.textContent = average;
+    gpaElement.className = "grade-badge";
 
-  // Hide the button before capturing
-  saveButton.style.display = "none";
+    if (average <= 1.75) {
+      gpaElement.classList.add("grade-excellent");
+    } else if (average <= 2.5) {
+      gpaElement.classList.add("grade-good");
+    } else if (average <= 3.0) {
+      gpaElement.classList.add("grade-passing");
+    } else {
+      gpaElement.classList.add("grade-failing");
+    }
+  }
 
-  // Give the browser time to repaint (hide button first)
-  setTimeout(() => {
-    html2canvas(element, {
-      backgroundColor: "#fff",
-      scale: 2,
-      useCORS: true
-    }).then(canvas => {
-      const link = document.createElement("a");
-      link.download = "gwa_output.jpg";
-      link.href = canvas.toDataURL("image/jpeg", 1.0);
-      link.click();
+  document.addEventListener("DOMContentLoaded", () => {
+    const countElement = document.getElementById("visitCount");
+    let count = localStorage.getItem("visitCount");
 
-      // Restore button after saving
-      saveButton.style.display = "inline-block";
-    });
-  }, 200); // slight delay to ensure styles apply
-}
-  </script>
+    if (!count) {
+      count = 1;
+    } else {
+      count = parseInt(count) + 1;
+    }
+
+    localStorage.setItem("visitCount", count);
+    countElement.textContent = count;
+  });
+
+  function saveAsImage() {
+    const element = document.querySelector("#outputDisplay");
+    const saveButton = event.target;
+
+    // Hide the button
+    saveButton.style.display = "none";
+
+    // Apply temp min-width to table container
+    const tableWrapper = element.querySelector(".table-responsive");
+    const originalStyle = tableWrapper.getAttribute("style") || "";
+    tableWrapper.style.minWidth = "700px";
+
+    setTimeout(() => {
+      html2canvas(element, {
+        backgroundColor: "#fff",
+        scale: 2,
+        useCORS: true
+      }).then(canvas => {
+        const link = document.createElement("a");
+        link.download = "gwa_output.jpg";
+        link.href = canvas.toDataURL("image/jpeg", 1.0);
+        link.click();
+
+        // Restore styles and button
+        tableWrapper.setAttribute("style", originalStyle);
+        saveButton.style.display = "inline-block";
+      });
+    }, 200);
+  }
+</script>
+
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
 </body>

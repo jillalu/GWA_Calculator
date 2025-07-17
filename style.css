@@ -2,12 +2,14 @@ body {
       background-color: #f8f9fa;
     }
     .container {
-      background: white;
-      padding: 2rem;
-      border-radius: 15px;
-      margin-top: 2rem;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
+  padding: 1rem;
+  margin: auto;
+  max-width: 800px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
     .hidden {
       display: none;
     }
@@ -51,4 +53,13 @@ footer {
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
+}
+table {
+  width: 100%;
+  table-layout: fixed;
+  word-wrap: break-word;
+}
+#inputForm, #outputDisplay {
+  max-width: 800px;
+  margin: auto;
 }
